@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     private GameObject _enemyLaserPrefab;
     private Player _player;
     private Laser lasers;
+    private bool _isAlive = true;
 
     // Audio and Animation
     private Animator _animator;
@@ -53,15 +54,18 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CalculateMovement();
-        if(_canFire < Time.time)
+        if (_isAlive == true)
         {
-            _fireRate = Random.Range(3.0f, 6.0f);
-            _canFire = Time.time + _fireRate;
-            GameObject _enemylaser = Instantiate(_enemyLaserPrefab,transform.position, Quaternion.identity);
-            Laser[] lasers = _enemylaser.GetComponentsInChildren<Laser>();
-            for (int i = 0; i < lasers.Length; i++)
+            if (_canFire < Time.time)
             {
-                lasers[i].AssignEnemyLaser(); 
+                _fireRate = Random.Range(3.0f, 6.0f);
+                _canFire = Time.time + _fireRate;
+                GameObject _enemylaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+                Laser[] lasers = _enemylaser.GetComponentsInChildren<Laser>();
+                for (int i = 0; i < lasers.Length; i++)
+                {
+                    lasers[i].AssignEnemyLaser();
+                }
             }
         }
     }
@@ -99,6 +103,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("OnEnemyDeath"); 
             _speed = 0;
             _audioSource.Play();
+            _isAlive = false;
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject,2.5f);
         }
