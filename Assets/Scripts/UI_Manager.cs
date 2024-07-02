@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
+    // Prefabs
     [SerializeField]
     private Text _scoretext;
     [SerializeField]
@@ -15,7 +16,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField]
     private Text _Restarttxt;
     private GameManager _gameManager;
-    // Start is called before the first frame update
+
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

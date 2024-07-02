@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    // Variables 
    [SerializeField]
     private float _speed = 5f;
+    // prefabs
     [SerializeField]
     private GameObject _ExplosionPrefab;
     private SpawnManager _SpawnManager;
-    // Start is called before the first frame update
+
     void Start()
     {
         _SpawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {    
         transform.Rotate(Vector3.forward * _speed * Time.deltaTime);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Laser")

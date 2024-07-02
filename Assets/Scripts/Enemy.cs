@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
-    private Animator _animator;
+    // Variables
     [SerializeField]
-    private AudioClip _explosionClip;
-    private AudioSource _audioSource;
-    [SerializeField]
-    private GameObject _enemyLaserPrefab;
+    private float _speed = 4f;
     [SerializeField]
     private float _fireRate = 3.0f;
     [SerializeField]
     private float _canFire = -1;
+
+ 
+    //Prefabs
+    private GameObject _enemyPrefab;
+    [SerializeField]
+    private GameObject _enemyLaserPrefab;
+    private Player _player;
+    private Laser lasers;
+
+    // Audio and Animation
+    private Animator _animator;
+    [SerializeField]
+    private AudioClip _explosionClip;
+    private AudioSource _audioSource;
+
+
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -36,19 +48,10 @@ public class Enemy : MonoBehaviour
         {
             _audioSource.clip = _explosionClip;
         }
-        
     }
-    [SerializeField]
-    private float _speed = 4f;
-    private GameObject _enemyPrefab;
-    private Player _player;
-    private Laser lasers;
-
-
+  
     void Update()
     {
-        
-
         CalculateMovement();
         if(_canFire < Time.time)
         {
@@ -76,8 +79,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       
-
         if (other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();
@@ -98,11 +99,8 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("OnEnemyDeath"); 
             _speed = 0;
             _audioSource.Play();
-            Destroy(GetComponent<Enemy>());
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject,2.5f);
-
         }
     }
-   
 }

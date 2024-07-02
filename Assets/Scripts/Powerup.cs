@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    private Player _player;
+    // variables
     [SerializeField]
     private float _speed = 3.0f;
     [SerializeField] // 0 = TripleShot , 1 = Speed , 2 = Sheild
     private int _powerID;
+
+    // Prefabs
+    private Player _player;
+
+    // Audio and Animation
     [SerializeField]
     private AudioClip _CollectedAudio = null;
 

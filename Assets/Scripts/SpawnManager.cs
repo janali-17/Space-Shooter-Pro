@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    // Variables
+    private bool _stopSpawning = false;
+
+    // Prefabs
     [SerializeField]
     private GameObject _enemyPrefabs;
     [SerializeField]
-    private GameObject _enemyContainer;
-    private bool _stopSpawning = false;
+    private GameObject _enemyContainer;   
     [SerializeField]
     private GameObject[] _PowerUps;
+
    public void  StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnTripleShotPowerUPRoutine());
-    }
-
-    void Update()
-    {
-        
     }
 
     IEnumerator SpawnEnemyRoutine()

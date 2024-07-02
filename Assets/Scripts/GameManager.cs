@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Variables
     [SerializeField]
     private bool _IsGameOver;
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyUp(KeyCode.R) && _IsGameOver== true) {

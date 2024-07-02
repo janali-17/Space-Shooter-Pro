@@ -5,8 +5,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Variables
     [SerializeField]
     private float _speed = 1.5f;
+    [SerializeField]
+    private float _FireRate = 0.15f;
+    [SerializeField]
+    private float _canfire = -1f;
+    [SerializeField]
+    private int _lives = 3;
+    private bool _IsTripleShotActive = false;
+    private bool _IsSpeedBoostActive = false;
+    private bool _IsShieldActive = false;
+    [SerializeField]
+    private int _score = 0;
+
+    // Prefabs
     [SerializeField]
     private GameObject _LaserPrefab;
     [SerializeField]
@@ -17,19 +31,10 @@ public class Player : MonoBehaviour
     private GameObject _rightEng;
     [SerializeField]
     private GameObject _leftEng;
-    [SerializeField]
-    private float _FireRate = 0.15f;
-    [SerializeField]
-    private float _canfire = -1f;
-    [SerializeField]
-    private int _lives = 3;
     private SpawnManager _SpawnManager;
     private UI_Manager _uiManager;
-    private bool _IsTripleShotActive = false;
-    private bool _IsSpeedBoostActive = false;
-    private bool _IsShieldActive = false;
-    [SerializeField]
-    private int _score = 0;
+
+    // Audio And Animation 
     [SerializeField]
     AudioClip _laserAudio;
     [SerializeField]
@@ -60,13 +65,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         calculateMovement();
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
         {
             FireLaser();
         }
-       
     }
-
     void calculateMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
