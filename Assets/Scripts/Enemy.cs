@@ -36,7 +36,6 @@ public class Enemy : MonoBehaviour
         {
             _audioSource.clip = _explosionClip;
         }
-        transform.position = new Vector3(0, 8, 0);
         
     }
     [SerializeField]

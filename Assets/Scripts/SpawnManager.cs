@@ -24,11 +24,12 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
-        Vector3 PostPos = new Vector3(Random.Range(-7.6f, 8.5f), 8, 0);
+
 
             yield return new WaitForSeconds(3.0f);
         while (_stopSpawning == false)
-        {
+        {    
+            Vector3 PostPos = new Vector3(Random.Range(-7.6f, 8.5f), 8, 0);
             GameObject newEnemy = Instantiate(_enemyPrefabs,PostPos, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
             yield return new WaitForSeconds(5);
