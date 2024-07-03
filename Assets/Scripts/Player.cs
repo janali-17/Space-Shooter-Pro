@@ -40,12 +40,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     AudioClip _ExplosionAudio;
     AudioSource audioSource;
+    [SerializeField]
+    Animator _animator;
 
     void Start()
     {
       
         transform.position = new Vector3(0, 0, 0);
-
         _SpawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UI_Manager>();
         audioSource = GetComponent<AudioSource>();
@@ -75,8 +76,8 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical"); 
         Vector3 Direction = new Vector3(horizontalInput, verticalInput, 0);
-        
-        if(_IsSpeedBoostActive == true)
+        _animator.SetFloat("Direction", horizontalInput);
+        if (_IsSpeedBoostActive == true)
         {
            
             transform.Translate(Direction * (_speed) * Time.deltaTime);
