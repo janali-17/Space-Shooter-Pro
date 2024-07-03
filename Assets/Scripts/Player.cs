@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private GameObject _leftEng;
     private SpawnManager _SpawnManager;
     private UI_Manager _uiManager;
+    private GameManager _gameManager;
 
     // Audio And Animation 
     [SerializeField]
@@ -45,8 +46,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-      
-        transform.position = new Vector3(0, 0, 0);
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _SpawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UI_Manager>();
         audioSource = GetComponent<AudioSource>();
@@ -61,6 +61,14 @@ public class Player : MonoBehaviour
         if (_SpawnManager == null )
         {
           Debug.LogError("The Spawn manager is Null");
+        }
+        if(_gameManager == null)
+        {
+            Debug.LogError("The GameManager is Null");
+        }
+        if(_gameManager._IsCO_OpMode == false)
+        {
+            transform.position = new Vector3(0, 0, 0);
         }
     }
     void Update()

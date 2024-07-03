@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     // Variables
     [SerializeField]
     private bool _IsGameOver;
+    [SerializeField]
+    public bool _IsCO_OpMode = false;
 
     void Update()
     {
