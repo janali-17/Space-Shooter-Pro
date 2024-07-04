@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
+    // Variables
+    public int CurrentPoints , BestPoints;
     // Prefabs
     [SerializeField]
-    private Text _scoretext;
+    private Text _scoretext, _bestScore;
     [SerializeField]
     private Image _liveImage;
     [SerializeField]
@@ -26,10 +29,30 @@ public class UI_Manager : MonoBehaviour
         _GameOver.gameObject.SetActive(false);
         _Restarttxt.gameObject.SetActive(false);
         _scoretext.text = "Score : " + 0;
+        BestPoints = PlayerPrefs.GetInt("Best : ", 0);
+        if(_bestScore != null)
+        {
+            _bestScore.text = "Best : " + BestPoints;
+        }
     }
-    public void UpdateScore(int scorePoints)
+
+    public void UpdateScore()
     {
-        _scoretext.text = "Score : " + scorePoints.ToString();
+        CurrentPoints += 10;
+        _scoretext.text = "Score : " + CurrentPoints.ToString();
+    }
+    public void CheckForBest()
+    {
+        Debug.Log("High score");
+        if(CurrentPoints > BestPoints)
+        {
+            BestPoints = CurrentPoints;
+            PlayerPrefs.SetInt("Best : ", BestPoints);
+            if(_bestScore != null)
+            {
+                _bestScore.text = "Best : " + BestPoints;
+            }
+        }
     }
     public void UpdateLives(int CurrentLives)
     {
@@ -58,13 +81,6 @@ public class UI_Manager : MonoBehaviour
 
         }
     }
-    public void Pause()
-    {
-        Time.timeScale = 0.0f;
-    }
-    public void Resume()
-    {
-        Time.timeScale = 1.0f;
-    }
+
 
 }

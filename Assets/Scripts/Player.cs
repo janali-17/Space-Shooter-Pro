@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
     private bool _IsTripleShotActive = false;
     private bool _IsSpeedBoostActive = false;
     private bool _IsShieldActive = false;
-    [SerializeField]
-    private int _score = 0;
     public bool _isPlayer1 = false;
     public bool _isPlayer2 = false;
 
@@ -179,6 +177,7 @@ public class Player : MonoBehaviour
             if (_lives == 0)
             {
                 _SpawnManager.OnPlayerDeath();
+                _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
             _uiManager.UpdateLives(_lives);
@@ -203,6 +202,7 @@ public class Player : MonoBehaviour
             if (_lives == 0)
             {
                 _SpawnManager.OnPlayerDeath();
+                _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
             _uiManager.UpdateLives(_lives);
@@ -236,10 +236,9 @@ public class Player : MonoBehaviour
         _IsShieldActive = true;
         _ShieldVisualizer.SetActive(true);
     }
-    public void AddScore(int points)
+    public void AddScore()
     {
-        _score = _score + points;
-        _uiManager.UpdateScore(_score);
+        _uiManager.UpdateScore();
     }
    public void RestartGame()
     {
