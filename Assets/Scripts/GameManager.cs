@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class GameManager : MonoBehaviour
     public bool _IsCO_OpMode = false;
 
     // GameObjects
-
+    [SerializeField]
+    private GameObject _Pausepanel;
     void Update()
     {
         
@@ -31,8 +33,9 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            Pause();
         }
+
     }
     public void GameOver()
     {
@@ -40,5 +43,19 @@ public class GameManager : MonoBehaviour
             _IsGameOver = true;
 
     }
-    
+    public void Pause()
+    { 
+        _Pausepanel.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+    public void Resume()
+    {
+        _Pausepanel.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }

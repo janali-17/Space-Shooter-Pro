@@ -10,12 +10,15 @@ public class UI_Manager : MonoBehaviour
     [SerializeField]
     private Image _liveImage;
     [SerializeField]
+    private Image _liveImage2;
+    [SerializeField]
     private Sprite[] _livesprites;
     [SerializeField]
     private Text _GameOver;
     [SerializeField]
     private Text _Restarttxt;
     private GameManager _gameManager;
+
 
     void Start()
     {
@@ -55,4 +58,13 @@ public class UI_Manager : MonoBehaviour
 
         }
     }
+    public void Pause()
+    {
+        Time.timeScale = 0.0f;
+    }
+    public void Resume()
+    {
+        Time.timeScale = 1.0f;
+    }
+
 }

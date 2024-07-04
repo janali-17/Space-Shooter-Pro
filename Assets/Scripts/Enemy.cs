@@ -30,8 +30,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
         _audioSource = GetComponent<AudioSource>();
+        _player = GameObject.Find("Player").GetComponent<Player>();
         if ( _player == null )  
         {
             Debug.LogError("There is no player");
@@ -95,17 +95,17 @@ public class Enemy : MonoBehaviour
             _audioSource.Play();
             Destroy(this.gameObject,2.6f);
 
-        }
-        if (other.tag == "Laser")
-        {
-            Destroy(other.gameObject);
-            _player.AddScore(10);
-            _animator.SetTrigger("OnEnemyDeath"); 
-            _speed = 0;
-            _audioSource.Play();
-            _isAlive = false;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(this.gameObject,2.5f);
-        }
+        }  
+            if (other.tag == "Laser")
+            {
+                Destroy(other.gameObject);
+                _player.AddScore(10);
+                _animator.SetTrigger("OnEnemyDeath");
+                _speed = 0;
+                _audioSource.Play();
+                _isAlive = false;
+                Destroy(GetComponent<Collider2D>());
+                Destroy(this.gameObject, 2.5f);
+            }
     }
 }

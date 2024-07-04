@@ -159,27 +159,54 @@ public class Player : MonoBehaviour
     }
     public void Damage()
     {
-        if (_IsShieldActive == true)
-        {   
-            _ShieldVisualizer.SetActive(false);
-            _IsShieldActive = false;
-            return;
-        }
+        if (_isPlayer1 == true)
+        {
+            if (_IsShieldActive == true)
+            {
+                _ShieldVisualizer.SetActive(false);
+                _IsShieldActive = false;
+                return;
+            }
             _lives--;
-        if (_lives == 2)
-        {
-            _rightEng.SetActive(true);
+            if (_lives == 2)
+            {
+                _rightEng.SetActive(true);
+            }
+            else if (_lives == 1)
+            {
+                _leftEng.SetActive(true);
+            }
+            if (_lives == 0)
+            {
+                _SpawnManager.OnPlayerDeath();
+                Destroy(this.gameObject);
+            }
+            _uiManager.UpdateLives(_lives);
         }
-        else if(_lives == 1)
+        if(_isPlayer2 == true)
         {
-            _leftEng.SetActive(true);
+            if (_IsShieldActive == true)
+            {
+                _ShieldVisualizer.SetActive(false);
+                _IsShieldActive = false;
+                return;
+            }
+            _lives--;
+            if (_lives == 2)
+            {
+                _rightEng.SetActive(true);
+            }
+            else if (_lives == 1)
+            {
+                _leftEng.SetActive(true);
+            }
+            if (_lives == 0)
+            {
+                _SpawnManager.OnPlayerDeath();
+                Destroy(this.gameObject);
+            }
+            _uiManager.UpdateLives(_lives);
         }
-        if (_lives == 0)
-        {
-            _SpawnManager.OnPlayerDeath();
-            Destroy(this.gameObject);
-        }
-        _uiManager.UpdateLives(_lives);
 
     }
     public void ActiveTriple()
