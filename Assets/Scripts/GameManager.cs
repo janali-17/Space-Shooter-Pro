@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class GameManager : MonoBehaviour
     // GameObjects
     [SerializeField]
     private GameObject _Pausepanel;
+
+    //Animation
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GameObject.Find("Panel").GetComponent<Animator>();
+    }
     void Update()
     {
         
@@ -43,9 +52,11 @@ public class GameManager : MonoBehaviour
             _IsGameOver = true;
 
     }
-    public void Pause()
+    public async void Pause()
     { 
         _Pausepanel.SetActive(true);
+        _animator.SetBool("IsPause", true);
+        await Task.Delay(2000);
         Time.timeScale = 0.0f;
     }
     public void Resume()
