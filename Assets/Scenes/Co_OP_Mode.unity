@@ -555,6 +555,8 @@ MonoBehaviour:
   _canfire: -1
   _lives: 3
   _score: 0
+  _isPlayer1: 1
+  _isPlayer2: 0
   _LaserPrefab: {fileID: 829858412696439766, guid: 8af4307d94f691c46907c7c6324a6b35,
     type: 3}
   _TripleShotPrefab: {fileID: 6113348459159472513, guid: 749650788027ec14b857d2d6bf990c48,
@@ -1622,6 +1624,8 @@ MonoBehaviour:
   _canfire: -1
   _lives: 3
   _score: 0
+  _isPlayer1: 0
+  _isPlayer2: 1
   _LaserPrefab: {fileID: 829858412696439766, guid: 8af4307d94f691c46907c7c6324a6b35,
     type: 3}
   _TripleShotPrefab: {fileID: 6113348459159472513, guid: 749650788027ec14b857d2d6bf990c48,

@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private bool _IsShieldActive = false;
     [SerializeField]
     private int _score = 0;
+    public bool _isPlayer1 = false;
+    public bool _isPlayer2 = false;
 
     // Prefabs
     [SerializeField]
@@ -74,35 +76,72 @@ public class Player : MonoBehaviour
     void Update()
     {
         calculateMovement();
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
-        {
-            FireLaser();
+        if(_isPlayer1 == true) {
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
+                {
+                FireLaser();
+            }
+        }
+        if(_isPlayer2 == true) {
+            if (Input.GetKeyDown(KeyCode.RightShift) && Time.time > _canfire)
+            {
+                FireLaser();
+            }
         }
     }
     void calculateMovement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical"); 
-        Vector3 Direction = new Vector3(horizontalInput, verticalInput, 0);
-        _animator.SetFloat("Direction", horizontalInput);
-        if (_IsSpeedBoostActive == true)
+        if (_isPlayer1 == true)
         {
-           
-            transform.Translate(Direction * (_speed) * Time.deltaTime);
-        }
-        else
-        { 
-        transform.Translate(Direction * _speed * Time.deltaTime);
-        }
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.9f, 0), 0);
+            float horizontalInput = Input.GetAxis("Horizontal-1");
+            float verticalInput = Input.GetAxis("Vertical-1");
+            Vector3 Direction = new Vector3(horizontalInput, verticalInput, 0);
+            _animator.SetFloat("Direction", horizontalInput);
+            if (_IsSpeedBoostActive == true)
+            {
 
-        if (transform.position.x <= -9.2)
-        {
-            transform.position = new Vector3(11.4f, transform.position.y, 0);
+                transform.Translate(Direction * (_speed) * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Direction * _speed * Time.deltaTime);
+            }
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.9f, 0), 0);
+
+            if (transform.position.x <= -9.2)
+            {
+                transform.position = new Vector3(11.4f, transform.position.y, 0);
+            }
+            else if (transform.position.x >= 11.4)
+            {
+                transform.position = new Vector3(-9.2f, transform.position.x, 0);
+            }
         }
-        else if (transform.position.x >= 11.4)
+        if(_isPlayer2 == true)
         {
-            transform.position = new Vector3(-9.2f, transform.position.x, 0);
+            float horizontalInput = Input.GetAxis("Horizontal-2");
+            float verticalInput = Input.GetAxis("Vertical-2");
+            Vector3 Direction = new Vector3(horizontalInput, verticalInput, 0);
+            _animator.SetFloat("Direction", horizontalInput);
+            if (_IsSpeedBoostActive == true)
+            {
+
+                transform.Translate(Direction * (_speed) * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Direction * _speed * Time.deltaTime);
+            }
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.9f, 0), 0);
+
+            if (transform.position.x <= -9.2)
+            {
+                transform.position = new Vector3(11.4f, transform.position.y, 0);
+            }
+            else if (transform.position.x >= 11.4)
+            {
+                transform.position = new Vector3(-9.2f, transform.position.x, 0);
+            }
         }
     }
     void FireLaser()
