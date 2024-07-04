@@ -8,10 +8,12 @@ public class MainMenu : MonoBehaviour
     public void Single_LoadGame()
     {
         SceneManager.LoadScene(1);// Game Scene
+        Time.timeScale = 1.0f;
     }
     public void Co_OP_LoadGame()
     {
         SceneManager.LoadScene(2);// Game Scene
+        Time.timeScale = 1.0f;
     }
     public void QuitGame()
     {
