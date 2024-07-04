@@ -43,7 +43,6 @@ public class UI_Manager : MonoBehaviour
     }
     public void CheckForBest()
     {
-        Debug.Log("High score");
         if(CurrentPoints > BestPoints)
         {
             BestPoints = CurrentPoints;

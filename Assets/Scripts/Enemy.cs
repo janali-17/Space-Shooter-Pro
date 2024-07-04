@@ -17,9 +17,10 @@ public class Enemy : MonoBehaviour
     private GameObject _enemyPrefab;
     [SerializeField]
     private GameObject _enemyLaserPrefab;
-    private Player _player;
+    private Player player;
     private Laser lasers;
     private bool _isAlive = true;
+    private GameManager _gameManager;
 
     // Audio and Animation
     private Animator _animator;
@@ -30,12 +31,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
-        _player = GameObject.Find("Player").GetComponent<Player>();
-        if ( _player == null )  
-        {
-            Debug.LogError("There is no player");
-        }
+
         _animator = GetComponent<Animator>();
         if( _animator == null )
         {
@@ -81,9 +79,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
+     public void AddScore(Player player)
+    {
+        if (_gameManager._IsCO_OpMode == false)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+        }
+
+        else { player = GameObject.Find("Player_1").GetComponent<Player>();
+            player = GameObject.Find("Player_2").GetComponent<Player>();}
+            
+            if (player == null)
+
+                Debug.LogError("There is no player");
+        player.AddScore();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.tag == "Player_1" || other.tag == "Player_2")
         {
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
@@ -99,7 +112,7 @@ public class Enemy : MonoBehaviour
             if (other.tag == "Laser")
             {
                 Destroy(other.gameObject);
-                _player.AddScore();
+                AddScore(player);
                 _animator.SetTrigger("OnEnemyDeath");
                 _speed = 0;
                 _audioSource.Play();
@@ -108,4 +121,5 @@ public class Enemy : MonoBehaviour
                 Destroy(this.gameObject, 2.5f);
             }
     }
+  
 }
