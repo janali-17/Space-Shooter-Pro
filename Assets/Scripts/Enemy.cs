@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private GameObject _enemyPrefab;
     [SerializeField]
     private GameObject _enemyLaserPrefab;
-    private Player player;
+    private Player player,player2;
     private Laser lasers;
     private bool _isAlive = true;
     private GameManager _gameManager;
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         }
 
         else { player = GameObject.Find("Player_1").GetComponent<Player>();
-            player = GameObject.Find("Player_2").GetComponent<Player>();}
+            player2 = GameObject.Find("Player_2").GetComponent<Player>();}
             
             if (player == null)
 

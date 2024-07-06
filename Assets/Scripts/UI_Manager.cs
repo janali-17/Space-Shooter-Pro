@@ -53,9 +53,18 @@ public class UI_Manager : MonoBehaviour
             }
         }
     }
-    public void UpdateLives(int CurrentLives)
+    public void UpdateLives1(int CurrentLives)
     {
         _liveImage.sprite = _livesprites[CurrentLives];
+        if (CurrentLives == 0)
+        {
+            _gameManager.GameOver();
+            GameOverSequence();
+        }
+    }
+    public void UpdateLives2(int CurrentLives)
+    {
+        _liveImage2.sprite = _livesprites[CurrentLives];
         if (CurrentLives == 0)
         {
             _gameManager.GameOver();

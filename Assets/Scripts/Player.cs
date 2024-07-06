@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Purchasing;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -180,7 +179,7 @@ public class Player : MonoBehaviour
                 _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
-            _uiManager.UpdateLives(_lives);
+            _uiManager.UpdateLives1(_lives);
         }
         if(_isPlayer2 == true)
         {
@@ -205,7 +204,7 @@ public class Player : MonoBehaviour
                 _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
-            _uiManager.UpdateLives(_lives);
+            _uiManager.UpdateLives2(_lives);
         }
 
     }
