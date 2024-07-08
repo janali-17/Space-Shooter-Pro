@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
             }
             if (_lives == 0)
             {
-                _SpawnManager.OnPlayerDeath();
+                //_SpawnManager.OnPlayerDeath();
                 _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
             }
             if (_lives == 0)
             {
-                _SpawnManager.OnPlayerDeath();
+               // _SpawnManager.OnPlayerDeath();
                 _uiManager.CheckForBest();
                 Destroy(this.gameObject);
             }
