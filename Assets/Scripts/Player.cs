@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
     {
         calculateMovement();
         if(_isPlayer1 == true) {
-            if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
+            if ((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("Fire"))&& Time.time > _canfire)
                 {
                 FireLaser();
             }
@@ -90,8 +91,8 @@ public class Player : MonoBehaviour
     {
         if (_isPlayer1 == true)
         {
-            float horizontalInput = Input.GetAxis("Horizontal-1");
-            float verticalInput = Input.GetAxis("Vertical-1");
+            float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal-1"); // Input.GetAxis("Horizontal-1");
+            float verticalInput =   CrossPlatformInputManager.GetAxis("Vertical-1"); //Input.GetAxis("Vertical-1");
             Vector3 Direction = new Vector3(horizontalInput, verticalInput, 0);
             _animator.SetFloat("Direction", horizontalInput);
             if (_IsSpeedBoostActive == true)
